@@ -1,0 +1,40 @@
+{
+  "name": "@thinke/toast",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "license": "MIT",
+  "description": "5KB 零依赖的 Toast 提示，支持黑暗模式。",
+  "scripts": {
+    "dev": "vite",
+    "dev:build": "vite build",
+    "build": "unbuild",
+    "preview": "vite preview",
+    "npm_publish": "npm run build && npm version patch && npm publish"
+  },
+  "devDependencies": {
+    "@rollup/pluginutils": "^5.1.0",
+    "esbuild": "^0.20.2",
+    "typescript": "^5.4.5",
+    "unbuild": "^2.0.0",
+    "vite": "^5.2.9"
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild": "^0.20.2"
+    }
+  }
+}

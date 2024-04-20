@@ -1,0 +1,27 @@
+body {
+  padding: 0px;
+  margin: 0px;
+}
+html {
+  color-scheme: dark;
+  /* --thinke-toast-font-size: 32px; */
+}
+
+main {
+  min-height: 100vh;
+  padding: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5vh 10vw;
+}
+.btns {
+  margin-top: 5vh;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+button {
+  padding: 8px 16px;
+}

@@ -4,11 +4,11 @@ import iconLoading from './svg/loading.svg';
 import iconSuccess from './svg/success.svg';
 import iconClose from './svg/close.svg';
 import css from './index.css';
-import { ToastTime, ToastType } from './type';
+import { ToastTime, ToastType, Toast, ToastTypeFn } from './type';
 
 const rootId = 'thinke-toast';
 const defaultDuration = 2500;
-
+/** toast icon map */
 const iconsMap: { [key in ToastType]: string } = {
   success: iconSuccess,
   loading: iconLoading,
@@ -17,15 +17,11 @@ const iconsMap: { [key in ToastType]: string } = {
   error: iconWarn,
   default: '',
 };
-
-function show(msg: string): () => void;
-function show(msg: string, duration: ToastTime): () => void;
-function show(msg: string, type: ToastType): () => void;
-function show(msg: string, type: ToastType, duration: ToastTime): () => void;
-function show(msg: string, type: ToastType | ToastTime = 'default', duration: ToastTime = defaultDuration): () => void {
-  if (typeof type === 'number') {
-    duration = type;
-    type = 'default';
+/** 展示`普通`Toast */
+function show(msg: string, type: ToastType = 'default', duration: ToastTime = defaultDuration): () => void {
+  // ssr
+  if (typeof document === 'undefined') {
+    return () => {};
   }
   const rootEl = getRootElement();
   let el = document.createElement('span');
@@ -69,10 +65,25 @@ function getRootElement() {
   }
   return rootEl;
 }
-const success = (msg: string, duration: ToastTime = defaultDuration) => show(msg, 'success', duration);
-const error = (msg: string, duration: ToastTime = defaultDuration) => show(msg, 'error', duration);
-const warn = (msg: string, duration: ToastTime = defaultDuration) => show(msg, 'warn', duration);
-const info = (msg: string, duration: ToastTime = defaultDuration) => show(msg, 'info', duration);
-const loading = (msg: string, duration: ToastTime = -1) => show(msg, 'loading', duration);
 
-export { show as default, show, success, warn, error, info, loading };
+/** 显示`成功`toast */
+const success: ToastTypeFn = (msg, duration = defaultDuration) => show(msg, 'success', duration);
+/** 显示`失败`toast */
+const error: ToastTypeFn = (msg, duration = defaultDuration) => show(msg, 'error', duration);
+/** 显示`警告`toast */
+const warn: ToastTypeFn = (msg, duration = defaultDuration) => show(msg, 'warn', duration);
+/** 显示`提醒`toast */
+const info: ToastTypeFn = (msg, duration = defaultDuration) => show(msg, 'info', duration);
+/** 显示  `加载中`toast，默认不自动关闭 */
+const loading: ToastTypeFn = (msg, duration = -1) => show(msg, 'loading', duration);
+
+/** 展示`普通`Toast */
+const toast: Toast = (msg, duration = defaultDuration) => show(msg, 'default', duration);
+toast.show = show;
+toast.success = success;
+toast.error = error;
+toast.info = info;
+toast.warn = warn;
+toast.loading = loading;
+
+export { toast as default, toast, show, success, warn, error, info, loading, iconsMap };

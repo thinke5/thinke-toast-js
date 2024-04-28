@@ -1,4 +1,4 @@
-import { show } from '../dist/index.mjs';
+import { show, toast } from '../dist/index.mjs';
 import './index.css';
 // import '../src/index.css';
 
@@ -34,7 +34,7 @@ document.querySelector(`#notclose-toast`)?.addEventListener('click', () => {
   show(`Hello, notclose!`, 'loading', -1);
 });
 document.querySelector(`#long-toast`)?.addEventListener('click', () => {
-  show(`Hello, long!long!long!long!long!long!long!l!long!long!long!long!long!long!`, -1);
+  toast.info(`Hello, long!long!long!long!long!long!long!l!long!long!long!long!long!long!`, -1);
 });
 document.querySelector(`#light`)?.addEventListener('click', () => {
   const html = document.querySelector('html')!;

@@ -3,7 +3,7 @@ import { transform } from 'esbuild';
 
 export default defineBuildConfig({
   failOnWarn: false,
-  entries: ['src/index'],
+  entries: ['src/index', 'src/icons'],
   // outDir: 'libs',
   clean: true,
   declaration: true,

@@ -1,22 +1,10 @@
-import iconInfo from './svg/info.svg';
-import iconWarn from './svg/warning.svg';
-import iconLoading from './svg/loading.svg';
-import iconSuccess from './svg/success.svg';
-import iconClose from './svg/close.svg';
+import * as icons from './icons';
 import css from './index.css';
 import { ToastTime, ToastType, Toast, ToastTypeFn } from './type';
 
 const rootId = 'thinke-toast';
 const defaultDuration = 2500;
-/** toast icon map */
-const iconsMap: { [key in ToastType]: string } = {
-  success: iconSuccess,
-  loading: iconLoading,
-  info: iconInfo,
-  warn: iconWarn,
-  error: iconWarn,
-  default: '',
-};
+
 /** 展示`普通`Toast */
 function show(msg: string, type: ToastType = 'default', duration: ToastTime = defaultDuration): () => void {
   // ssr
@@ -26,7 +14,7 @@ function show(msg: string, type: ToastType = 'default', duration: ToastTime = de
   const rootEl = getRootElement();
   let el = document.createElement('span');
   el.className = `${rootId}-${type}`;
-  el.innerHTML = iconsMap[type];
+  el.innerHTML = icons[type];
   el.appendChild(document.createTextNode(msg));
 
   let timer: number;
@@ -42,7 +30,7 @@ function show(msg: string, type: ToastType = 'default', duration: ToastTime = de
     timer = setTimeout(close, duration);
   } else {
     let tem = document.createElement('span');
-    tem.innerHTML = iconClose;
+    tem.innerHTML = icons.close;
     const svg = tem.firstChild as HTMLElement;
     svg.addEventListener('click', close);
     svg.style.fontSize = '1em';
@@ -86,4 +74,4 @@ toast.info = info;
 toast.warn = warn;
 toast.loading = loading;
 
-export { toast as default, toast, show, success, warn, error, info, loading, iconsMap };
+export { toast as default, toast, show, success, warn, error, info, loading };

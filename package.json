@@ -1,6 +1,6 @@
 {
   "name": "@thinke/toast",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -10,6 +10,12 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./icons": {
+      "import": "./dist/icons.mjs",
+      "types": "./dist/icons.d.ts",
+      "default": "./dist/icons.mjs",
+      "require": "./dist/icons.cjs"
     }
   },
   "files": [

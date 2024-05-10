@@ -1,9 +1,10 @@
 export type ToastType = 'default' | 'warn' | 'error' | 'info' | 'success' | 'loading';
 export type ToastTime = number;
+export type ToastMsg = string | HTMLElement;
 
 export interface Toast {
   /** 展示`普通`Toast */
-  (msg: string, duration?: ToastTime): () => void;
+  (msg: ToastMsg, duration?: ToastTime): () => void;
   /** 展示`普通`Toast */
   show: ToastShow;
   /** 显示`成功`toast */
@@ -18,6 +19,6 @@ export interface Toast {
   loading: ToastTypeFn;
 }
 
-export type ToastTypeFn = (msg: string, duration?: ToastTime) => () => void;
+export type ToastTypeFn = (msg: ToastMsg, duration?: ToastTime) => () => void;
 
-type ToastShow = (msg: string, type?: ToastType, duration?: ToastTime) => () => void;
+type ToastShow = (msg: ToastMsg, type?: ToastType, duration?: ToastTime) => () => void;

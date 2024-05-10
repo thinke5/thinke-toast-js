@@ -1,8 +1,5 @@
-#thinke-toast,
-#thinke-toast * {
-  box-sizing: border-box;
-}
 #thinke-toast {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,12 +11,12 @@
   left: 0;
   top: 0;
   z-index: 9999;
-  cursor: pointer;
   transition: 0.2s;
 }
-#thinke-toast > span {
+#thinke-toast > div {
   width: max-content;
   height: max-content;
+  overflow: hidden;
   pointer-events: auto;
   animation: fadein 0.3s;
   border-radius: 0.32em;
@@ -29,14 +26,20 @@
   transition: 0.3s;
   font-size: var(--thinke-toast-font-size, 14px);
   display: flex;
-  align-items: center;
+  vertical-align: baseline;
   gap: 4px;
 }
-#thinke-toast svg {
+#thinke-toast > div > svg {
   font-size: 1.25em;
+  margin-top: 0.1em;
   fill: currentColor;
 }
-#thinke-toast > span.hide {
+#thinke-toast > div > svg.close-icon {
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 0.25em;
+}
+#thinke-toast > div.hide {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-1em);
@@ -69,7 +72,7 @@
   color: #333;
 }
 
-.dark #thinke-toast span {
+.dark #thinke-toast > div {
   box-shadow: 0 0 10px 6px rgba(35, 34, 34, 0.1);
 }
 .dark .thinke-toast-warn {

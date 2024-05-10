@@ -1,6 +1,6 @@
 import { show, toast } from '../dist/index.mjs';
 import './index.css';
-// import '../src/index.css';
+import '../src/index.css';
 
 const types = ['default', 'warn', 'error', 'success', 'info', 'loading'];
 
@@ -13,6 +13,7 @@ document.querySelector('#app')!.innerHTML = `
   <button id="xss-toast">xss</button>
   <button id="notclose-toast">notclose</button>
   <button id="long-toast">long</button>
+  <button id="ele-toast">ele-toast</button>
 </div>
 <div class='btns'>
 <button id="light">light theme</button>
@@ -36,6 +37,14 @@ document.querySelector(`#notclose-toast`)?.addEventListener('click', () => {
 document.querySelector(`#long-toast`)?.addEventListener('click', () => {
   toast.info(`Hello, long!long!long!long!long!long!long!l!long!long!long!long!long!long!`, -1);
 });
+document.querySelector(`#ele-toast`)?.addEventListener('click', () => {
+  const div = document.createElement('div');
+  div.innerText = 'EEEEEEEE';
+  div.className = 't-div';
+  toast.warn(div, -1);
+});
+
+// __
 document.querySelector(`#light`)?.addEventListener('click', () => {
   const html = document.querySelector('html')!;
   html.style.colorScheme = 'light';

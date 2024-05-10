@@ -1,21 +1,23 @@
 import * as icons from './icons';
 import css from './index.css';
-import { ToastTime, ToastType, Toast, ToastTypeFn } from './type';
+import { ToastTime, ToastType, Toast, ToastTypeFn, ToastMsg } from './type';
 
+// const css = ''; // Test
 const rootId = 'thinke-toast';
 const defaultDuration = 2500;
 
 /** 展示`普通`Toast */
-function show(msg: string, type: ToastType = 'default', duration: ToastTime = defaultDuration): () => void {
+function show(msg: ToastMsg, type: ToastType = 'default', duration: ToastTime = defaultDuration): () => void {
   // ssr
   if (typeof document === 'undefined') {
     return () => {};
   }
   const rootEl = getRootElement();
-  let el = document.createElement('span');
+  let el = document.createElement('div');
   el.className = `${rootId}-${type}`;
   el.innerHTML = icons[type];
-  el.appendChild(document.createTextNode(msg));
+  const child = msg instanceof HTMLElement ? msg : document.createTextNode(String(msg));
+  el.appendChild(child);
 
   let timer: number;
   function close() {
@@ -29,11 +31,11 @@ function show(msg: string, type: ToastType = 'default', duration: ToastTime = de
   if (duration > 0) {
     timer = setTimeout(close, duration);
   } else {
-    let tem = document.createElement('span');
+    let tem = document.createElement('div');
     tem.innerHTML = icons.close;
     const svg = tem.firstChild as HTMLElement;
     svg.addEventListener('click', close);
-    svg.style.fontSize = '1em';
+    svg.classList.add('close-icon');
     el.appendChild(svg);
     tem = null as any;
   }

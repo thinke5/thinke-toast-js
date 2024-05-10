@@ -25,3 +25,9 @@ main {
 button {
   padding: 8px 16px;
 }
+
+.t-div {
+  height: 100px;
+  padding: 0 20px;
+  background-color: azure;
+}

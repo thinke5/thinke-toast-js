@@ -26,7 +26,6 @@
   transition: 0.3s;
   font-size: var(--thinke-toast-font-size, 14px);
   display: flex;
-  vertical-align: baseline;
   gap: 4px;
 }
 #thinke-toast > div > svg {
